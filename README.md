@@ -137,8 +137,8 @@ The server listens on `127.0.0.1` only. It has no login, so do not expose it to 
 
 ## Author
 
-**Haji Gul**, PhD candidate (AI), Universiti Brunei Darussalam.
-Research interests: knowledge graph completion, link prediction, LLM-augmented graph reasoning.
+**Haji Gul**, PhD (AI), Universiti Brunei Darussalam.
+Research interests: knowledge graph completion, NLP, link prediction, LLM-augmented graph reasoning, LLM, Transformer, Medical Research.
 
 GitHub: [@hajigul](https://github.com/hajigul)
 
