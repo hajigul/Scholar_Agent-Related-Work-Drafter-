@@ -1,13 +1,26 @@
 # Scholar_Agent-Related-Work-Drafter-
 
-
 A free, local tool that drafts the **related-work section** of a research paper. Paste a topic, title, or abstract, and it finds papers on arXiv, writes a short cited paragraph with a small local language model, and builds the reference list from real arXiv data.
 
-No API keys, no accounts, no cost. Everything runs on your computer with [Ollama](https://ollama.com).
+No API keys, no accounts, no cost. The language model runs on your own computer with [Ollama](https://ollama.com).
 
-![Home screen](docs/rw-home.png)
+## Screenshots
 
-![Draft with papers](docs/rw-draft.png)
+### 1. Home screen
+Paste a topic, title or abstract, pick a local model, and click **Draft related work**.
+
+![Home screen](rw1.png)
+
+### 2. Draft being written
+The agent plans three search phrases, searches arXiv, and streams the related-work paragraph with citations like [1], [2].
+
+![Draft being written](w2.png)
+
+
+### 3. Papers used and references
+Every paper comes from arXiv, with a link. Untick papers that don't fit and click **Rewrite with selected**. The reference list is built from real arXiv data.
+
+![Papers used](rw3.png)
 
 ## How it works
 
@@ -41,13 +54,23 @@ The key design choice: **the model never writes the reference list.** Titles, au
 - **Export.** Copy the text, the references, or BibTeX, or download everything as Markdown.
 - **Command line and web app**, dark and light themes, model picker, streaming output.
 
+## Why run it locally?
+
+- **No API and no cost.** It uses a free open model through Ollama. There is no API key, no account, no subscription and no usage limits.
+- **Your text stays on your computer.** The language model runs on your own machine, so your abstract or draft is never sent to an AI company. The only network traffic is short search phrases sent to arXiv, the same as typing them into the arXiv website.
+- **Works for unpublished research.** You can paste an unpublished abstract without uploading it to a cloud AI service.
+- **Real references.** Titles, authors, years and links come directly from arXiv, not from the model, so the reference list cannot contain invented papers.
+- **Transparent.** The search log shows which queries ran and what came back, and citation numbers that don't exist are flagged.
+- **Easy to share.** Anyone with Python and Ollama can run it with a few commands.
+- **Open and hackable.** The whole project is a few small Python files and one HTML page.
+
 ## Quick start
 
 **Requirements:** Python 3.9+ and [Ollama](https://ollama.com/download).
 
 ```bash
-git clone https://github.com/hajigul/Related-Work-Drafter.git
-cd Related-Work-Drafter
+git clone https://github.com/hajigul/Scholar-Agent.git
+cd Scholar-Agent
 
 python3 -m venv agent-env
 source agent-env/bin/activate        # Windows: agent-env\Scripts\activate
@@ -78,14 +101,18 @@ Cache lifetime and model keep-alive are set in `config.py`. A larger model (for 
 ## Project structure
 
 ```
-Related-Work-Drafter/
+Scholar-Agent/
 ├── related_work.py   # engine: query planning, search, drafting, checks, CLI
 ├── rw_server.py      # local web server (streams events to the page)
 ├── rw.html           # front end
 ├── tools.py          # arXiv search with caching and 3-second request pacing
 ├── config.py         # settings
+├── agent.py          # ScholarAgent paper-search assistant (first project)
+├── eval.py           # evaluation suite for ScholarAgent
+├── server.py         # ScholarAgent web server
+├── index.html        # ScholarAgent front end
 ├── requirements.txt
-└── docs/             # screenshots
+└── rw1.png, rw2.png, rw3.png   # screenshots
 ```
 
 ## Limitations
@@ -94,7 +121,7 @@ Related-Work-Drafter/
 - **This is a starting point, not a finished section.** Search is arXiv only, so journal papers and anything not on arXiv will be missing. Add those yourself.
 - **Relevance is a keyword check.** The "on topic" badge means the topic words appear in the title or abstract, not that the paper truly fits. That is why the untick-and-rewrite control exists.
 - **Search quality depends on the model's search phrases.** If results are poor, check the search log and try rewording your input.
-- **No formal evaluation yet.** I have not measured retrieval or writing quality on a labeled test set.
+- **No formal evaluation yet** for the drafter. Retrieval and writing quality have not been measured on a labeled test set.
 - arXiv requests are paced 3 seconds apart, as the arXiv API terms request, so each draft takes a while.
 
 ## Security note
