@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Related Work Drafter</title>
+<style>
+:root{--bg:#0b0f17;--panel:#111827;--panel2:#162033;--line:#233049;--text:#e6edf7;--muted:#8da0bd;--accent:#7c9cff;--accent2:#35d0ba;--warn:#f5b84b;--bad:#ff6b6b;--shadow:0 8px 30px rgba(0,0,0,.35)}
+[data-theme=light]{--bg:#f4f6fb;--panel:#fff;--panel2:#eef2fa;--line:#dbe3f1;--text:#101828;--muted:#5b6b86;--accent:#4a63e7;--accent2:#0f9d8a;--warn:#b7791f;--bad:#d64545;--shadow:0 8px 30px rgba(20,30,60,.08)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.bname{font-weight:700;font-size:18px}.bsub{font-size:12px;color:var(--muted)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,textarea,button{font:inherit;color:inherit}
+select{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.ghost,.mini{background:transparent;border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--muted)}
+.ghost:hover,.mini:hover{color:var(--text);border-color:var(--accent)}
+.mini{padding:3px 10px;font-size:12px;border-radius:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--warn);display:inline-block}
+.dot.on{background:var(--accent2);box-shadow:0 0 8px var(--accent2)}.dot.off{background:var(--bad)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px;box-shadow:var(--shadow)}
+textarea{width:100%;min-height:120px;resize:vertical;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:0}
+textarea:focus{border-color:var(--accent)}
+.go{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:0;border-radius:12px;padding:10px 22px;font-weight:600;cursor:pointer}
+.go.stop{background:var(--bad)}.go:disabled{opacity:.6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{background:transparent;border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:12.5px;cursor:pointer;color:var(--muted)}
+.chip:hover{color:var(--text);border-color:var(--accent)}
+h2{font-size:15px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.muted{color:var(--muted);font-size:12.5px}
+.status{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:13.5px;margin-bottom:12px}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.draft{font-size:15.5px;white-space:pre-wrap}
+.cite{color:var(--accent);text-decoration:none;font-weight:600}
+.warn{border:1px solid var(--warn);color:var(--warn);border-radius:10px;padding:8px 12px;font-size:13.5px;margin-top:10px}
+.errbox{border:1px solid var(--bad);color:var(--bad);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.refs{font-size:13px;color:var(--muted);margin-top:12px;white-space:pre-wrap}
+.paper{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px;background:var(--panel2)}
+.paper.hl{border-color:var(--accent)}
+.paper input{margin-top:5px}
+.pt{color:var(--text);font-weight:600;text-decoration:none;font-size:14px}.pt:hover{color:var(--accent)}
+.pm{font-size:12px;color:var(--muted)}
+.pill{font-size:11px;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.pill.ok{color:var(--accent2);border-color:var(--accent2)}.pill.warn{color:var(--warn);border-color:var(--warn)}
+details{margin-top:8px}summary{cursor:pointer;color:var(--muted);font-size:13px}
+.log{font-size:12.5px;color:var(--muted);padding-left:18px;margin:6px 0 0}
+.queries{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+code{background:var(--panel2);border:1px solid var(--line);padding:1px 7px;border-radius:6px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo">R</div><div><div class="bname">Related Work Drafter</div><div class="bsub">local · arXiv · citations from real data</div></div></div>
+    <div class="row">
+      <span class="dot" id="dot"></span><span class="muted" id="st">Checking Ollama…</span>
+      <select id="model"></select>
+      <button class="ghost" id="theme">Light / Dark</button>
+    </div>
+  </header>
+
+  <div class="card">
+    <h2>Your topic, title or abstract</h2>
+    <textarea id="text" placeholder="Paste your abstract, or type a topic, e.g. noisy knowledge graph refinement with large language models"></textarea>
+    <div class="row" style="margin-top:10px;justify-content:space-between">
+      <div class="chips" id="chips" style="margin:0"></div>
+      <button class="go" id="go">Draft related work</button>
+    </div>
+  </div>
+
+  <div id="out" hidden>
+    <div class="status" id="status"><span class="spin"></span><span id="stext">Starting…</span></div>
+    <div id="errs"></div>
+    <div class="grid">
+      <div class="card">
+        <h2>Draft <span class="row"><button class="mini" id="copyDraft" hidden>Copy text</button><button class="mini" id="dl" hidden>Download .md</button></span></h2>
+        <div class="draft" id="draft"></div>
+        <div id="warns"></div>
+        <div class="refs" id="refs"></div>
+        <div class="row" style="margin-top:10px"><button class="mini" id="copyRefs" hidden>Copy references</button><button class="mini" id="copyBib" hidden>Copy BibTeX</button></div>
+        <div class="muted" id="meta" style="margin-top:8px"></div>
+      </div>
+      <div class="card">
+        <h2>Papers used <button class="mini" id="rewrite" hidden>Rewrite with selected</button></h2>
+        <div class="queries" id="queries"></div>
+        <div id="papers"></div>
+        <details id="logbox" hidden><summary>Search log</summary><ul class="log" id="log"></ul></details>
+        <div class="muted" style="margin-top:8px">Untick papers that don't fit, then rewrite. The model only sees the ticked ones.</div>
+      </div>
+    </div>
+  </div>
+  <p class="muted" style="text-align:center;margin-top:20px">The paper list and links come from arXiv. The paragraph is written by a small local model: check every claim against the abstracts.</p>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const EX = ["noisy knowledge graph refinement with large language models",
+            "drug target prediction with knowledge graphs",
+            "retrieval augmented generation for question answering"];
+let papers = [], section = '', refs = '', last = null, running = false, ctrl = null;
+
+EX.forEach(t => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = t; b.onclick = () => { $('#text').value = t; }; $('#chips').appendChild(b); });
+const flash = (b, t) => { const o = b.textContent; b.textContent = t; setTimeout(() => b.textContent = o, 1200); };
+const copy = (b, txt) => { navigator.clipboard.writeText(txt); flash(b, 'Copied'); };
+
+function bib(p, i){
+  const au = (p.authors || []).join(' and ') + ((p.authors_total || 0) > (p.authors || []).length ? ' and others' : '');
+  const y = (p.published || '').slice(0, 4);
+  const t = s => String(s || '').replace(/([&%_#])/g, '\\$1');
+  return `@misc{ref${i}_${y},\n  title={${t(p.title)}},\n  author={${t(au)}},\n  year={${y}},\n  eprint={${p.id || ''}},\n  archivePrefix={arXiv},\n  url={${p.link}}\n}`;
+}
+function renderDraft(final){
+  const h = esc(section).replace(/\[(\d+)\]/g, (m, n) => `<a class="cite" href="#p${n}" data-n="${n}">[${n}]</a>`);
+  $('#draft').innerHTML = h;
+}
+function renderPapers(){
+  $('#papers').innerHTML = papers.map((p, i) => {
+    const rel = {high: ['ok','on topic'], partial: ['warn','partly relevant'], low: ['warn','weak match']}[p.relevance];
+    const au = (p.authors || []).slice(0, 3).join(', ') + ((p.authors_total || 0) > 3 ? ' et al.' : '');
+    return `<div class="paper" id="p${i+1}"><input type="checkbox" checked data-i="${i}">
+      <div><a class="pt" href="${esc(p.link)}" target="_blank" rel="noopener">[${i+1}] ${esc(p.title)}</a>
+      <div class="pm">${esc((p.published||'').slice(0,4))} · ${esc(au)} ${rel ? `<span class="pill ${rel[0]}">${rel[1]}</span>` : ''}</div></div></div>`;
+  }).join('');
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('.cite'); if (!a) return;
+  e.preventDefault();
+  const el = document.getElementById('p' + a.dataset.n); if (!el) return;
+  el.scrollIntoView({behavior: 'smooth', block: 'center'}); el.classList.add('hl'); setTimeout(() => el.classList.remove('hl'), 1500);
+});
+
+async function draft(rewritePapers){
+  const text = $('#text').value.trim();
+  if (!text || running) return;
+  running = true; ctrl = new AbortController();
+  $('#go').textContent = 'Stop'; $('#go').classList.add('stop');
+  $('#out').hidden = false; $('#status').hidden = false; $('#stext').textContent = 'Starting…';
+  $('#errs').innerHTML = ''; $('#draft').innerHTML = ''; $('#warns').innerHTML = ''; $('#refs').textContent = ''; $('#meta').textContent = '';
+  ['copyDraft','dl','copyRefs','copyBib','rewrite'].forEach(id => $('#' + id).hidden = true);
+  section = ''; refs = ''; last = null;
+  if (!rewritePapers) { papers = []; $('#papers').innerHTML = ''; $('#queries').innerHTML = ''; $('#logbox').hidden = true; }
+  try {
+    const res = await fetch('/api/draft', {method: 'POST', headers: {'Content-Type': 'application/json'}, signal: ctrl.signal,
+      body: JSON.stringify({text, model: $('#model').value, papers: rewritePapers || null})});
+    if (!res.ok) throw new Error('Server returned ' + res.status);
+    const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '';
+    while (true) {
+      const {done, value} = await reader.read(); if (done) break;
+      buf += dec.decode(value, {stream: true}); let i;
+      while ((i = buf.indexOf('\n')) >= 0) {
+        const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!line) continue;
+        const ev = JSON.parse(line);
+        if (ev.type === 'status') $('#stext').textContent = ev.text;
+        else if (ev.type === 'queries') $('#queries').innerHTML = ev.queries.map(q => `<code>${esc(q)}</code>`).join('');
+        else if (ev.type === 'papers') {
+          papers = ev.papers; renderPapers();
+          if (ev.log && ev.log.length) { $('#logbox').hidden = false; $('#log').innerHTML = ev.log.map(l => `<li>${esc(l)}</li>`).join(''); }
+        }
+        else if (ev.type === 'token') { section += ev.text; renderDraft(); }
+        else if (ev.type === 'error') $('#errs').innerHTML = `<div class="errbox">${esc(ev.text)}</div>`;
+        else if (ev.type === 'done') {
+          last = ev; section = ev.section; refs = ev.references; renderDraft();
+          $('#refs').textContent = refs;
+          let w = '';
+          if (ev.bad.length) w += `<div class="warn">The draft cites ${ev.bad.map(n => '[' + n + ']').join(', ')}, which are not in the reference list. Remove them.</div>`;
+          if (ev.unused.length) w += `<div class="warn">Not cited: ${ev.unused.map(n => '[' + n + ']').join(', ')}. Consider adding them or unticking them.</div>`;
+          $('#warns').innerHTML = w;
+          $('#meta').textContent = `${papers.length} papers · ${ev.seconds}s`;
+          ['copyDraft','dl','copyRefs','copyBib','rewrite'].forEach(id => $('#' + id).hidden = false);
+        }
+      }
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') $('#errs').innerHTML = `<div class="errbox">Could not reach the server: ${esc(e.message)}</div>`;
+  } finally {
+    $('#status').hidden = true; running = false;
+    $('#go').textContent = 'Draft related work'; $('#go').classList.remove('stop');
+  }
+}
+$('#go').onclick = () => running ? ctrl.abort() : draft(null);
+$('#rewrite').onclick = () => {
+  const sel = [...document.querySelectorAll('#papers input:checked')].map(c => papers[+c.dataset.i]);
+  if (!sel.length) { $('#errs').innerHTML = '<div class="errbox">Tick at least one paper.</div>'; return; }
+  draft(sel);
+};
+$('#copyDraft').onclick = e => copy(e.target, section);
+$('#copyRefs').onclick = e => copy(e.target, refs);
+$('#copyBib').onclick = e => copy(e.target, papers.map((p, i) => bib(p, i + 1)).join('\n\n'));
+$('#dl').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([`## Related Work (draft)\n\n${section}\n\n### References\n\n${refs}\n`], {type: 'text/markdown'}));
+  a.download = 'related-work.md'; a.click();
+};
+
+const root = document.documentElement;
+root.dataset.theme = localStorage.getItem('rwtheme') || 'dark';
+$('#theme').onclick = () => { root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('rwtheme', root.dataset.theme); };
+fetch('/api/models').then(r => r.json()).then(d => {
+  const sel = $('#model');
+  if (!d.models.length) { $('#dot').classList.add('off'); $('#st').textContent = 'Ollama offline: open the Ollama app'; sel.innerHTML = `<option>${esc(d.default)}</option>`; return; }
+  $('#dot').classList.add('on'); $('#st').textContent = 'Ollama online';
+  d.models.forEach(m => { const o = document.createElement('option'); o.value = o.textContent = m; if (m === d.default) o.selected = true; sel.appendChild(o); });
+}).catch(() => { $('#dot').classList.add('off'); $('#st').textContent = 'Server error'; });
+</script>
+</body>
+</html>
